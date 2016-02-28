@@ -66,12 +66,11 @@ StateErrorType OnInterruptRepeatState(State* state, StateInterruptType interrupt
 
 State* InitRepeatState(State* newState, State* parentState)
 {
-    newState = StateInit(newState, parentState, OnEnterRepeatState, OnExitRepeatState, 0);
+    newState = StateInit(newState, parentState, OnEnterRepeatState, OnExitRepeatState, OnVisualizeLoop);
     if (newState)
     {
         newState->userData = malloc(sizeof(RepeatData));
         newState->OnInterrupt = OnInterruptRepeatState;
-        newState->OnLoop = OnVisualizeLoop;
     }
     return newState;
 }

@@ -297,7 +297,8 @@ int main(void)
         }
         else
         {
-            focusedState->OnLoop(focusedState);
+            // TODO: drive this from a runloop and stop using the private _OnLoop method.
+            focusedState->_OnLoop(focusedState);
         }
         sei();
     }

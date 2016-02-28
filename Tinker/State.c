@@ -72,10 +72,10 @@ State* StateInitWSubstates(State* newState, State* parentState, StateTransitionF
 {
     if (newState)
     {
-        newState->OnEnterState = enter;
-        newState->OnExitState = exit;
+        newState->_OnEnterState = enter;
+        newState->_OnExitState = exit;
         newState->OnInterrupt = 0;
-        newState->OnLoop = BubblingOnLoop;
+        newState->_OnLoop = BubblingOnLoop;
         newState->_storage = StatePrivateInitWSubstates(NewStatePrivate(substateCount), parentState, onLoop, substates, substateCount);
     }
     return newState;
@@ -103,7 +103,7 @@ StateErrorType StateEnter(State* state, void* data, uint8_t datalen)
             }
             if (STATE_ERROR_NONE == result)
             {
-                result = (state->OnEnterState) ? state->OnEnterState(state, data, datalen) : STATE_ERROR_NONE;
+                result = (state->_OnEnterState) ? state->_OnEnterState(state, data, datalen) : STATE_ERROR_NONE;
                 priv->isEntered = (STATE_ERROR_NONE == result);
             }
         }
@@ -129,15 +129,15 @@ StateErrorType StateExit(State* state, void* data, uint8_t datalen)
                 }
             }
             if (STATE_ERROR_NONE == result)
-            result = (state->OnExitState) ? state->OnExitState(state, data, datalen) : STATE_ERROR_NONE;
+            result = (state->_OnExitState) ? state->_OnExitState(state, data, datalen) : STATE_ERROR_NONE;
         }
     }
     return result;
 }
 
-int8_t StateIsEntered(State* state)
+bool StateIsEntered(State* state)
 {
-    int8_t isEntered = 0;
+    bool isEntered = false;
     if (state) {
         StatePrivate* priv = (StatePrivate*)state->_storage;
         isEntered = priv->isEntered;
@@ -154,9 +154,9 @@ StateErrorType StateHandleInterrupt(State* state, StateInterruptType interruptTy
     return STATE_ERROR_FALSE;
 }
 
-int8_t IsRootState(State* state)
+bool IsRootState(State* state)
 {
-    int8_t result = 0;
+    bool result = false;
     
     if (state)
     {

@@ -11,6 +11,14 @@
 #include <stdlib.h>
 #include <avr/interrupt.h>
 
+// +--------------------------------------------------------------------------+
+// | MACHINE->STATE INTERNAL INTERFACE
+// +--------------------------------------------------------------------------+
+extern StateErrorType StateEnter(State* state, void* data, uint8_t datalen);
+extern StateErrorType StateExit(State* state, void* data, uint8_t datalen);
+extern int8_t StateIsChildOf(State* state, State* possibleAncestor);
+extern State* GetParentState(State* state);
+
 typedef struct _MachinePrivate
 {
     State* focus;

@@ -8,8 +8,8 @@
 #ifndef ALLSTATES_H_
 #define ALLSTATES_H_
 
-
-#include "State.h"
+#include "Framework.h"
+#include "tinker/State.h"
 #include "Pulse.h"
 
 // +--[ RUNNING ]-------------------------------------------------------------+

@@ -7,7 +7,7 @@
 #ifndef MACHINE_H_
 #define MACHINE_H_
 
-#include "State.h"
+#include "tinker/State.h"
 
 struct _MachineType;
 

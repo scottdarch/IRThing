@@ -9,7 +9,7 @@
 #define INDICATOR_H_
 
 #include "Framework.h"
-#include "RunLoop.h"
+#include "tinker/RunLoop.h"
 
 #define INDICATORMODE_NONE 0
 #define INDICATORMODE_ON 1

@@ -7,7 +7,8 @@
 #ifndef STATE_H_
 #define STATE_H_
 
-#include "Framework.h"
+#include <stdint.h>
+#include <stdlib.h>
 
 // +--------------------------------------------------------------------------+
 // | STATE TYPES
@@ -15,7 +16,14 @@
 
 struct _StateType;
 
+/**
+ * Type all STATE_ERROR_XXXX can be interpreted as.
+ */
 typedef int8_t StateErrorType;
+
+/**
+ * Type all 
+ */
 typedef int8_t StateInterruptType;
 
 #define STATE_ERROR_NONE 0x01

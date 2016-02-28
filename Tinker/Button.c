@@ -4,15 +4,16 @@
 ~          +-+
 */
 
-#include "Button.h"
+#include "tinker/Button.h"
+#include "tinker/RunLoop.h"
 
 #define BUTTON_STATE_UNSTABLE 0
 #define BUTTON_STATE_CLOSED   4
 #define BUTTON_STATE_OPEN     5
 
 #define BUTTON_STATE_QUEUE_LEN 13U
-#define BUTTON_STATE_DOWN_BIT (uint16_t)_BV(15)
-#define BUTTON_READING_BITS_MASK 0x1FFF
+#define BUTTON_STATE_DOWN_BIT 0x8000U
+#define BUTTON_READING_BITS_MASK 0x1FFFU
 
 #define IS_BUTTON_PIN_HIGH(BUTTON) ((BUTTON->_port & (1<<BUTTON->_pin)) ? 0x01 : 0x00)
 
@@ -108,12 +109,15 @@ uint8_t _HandlePortMessage(RunLoopPort* port, RunLoop* runLoop, RunLoopMessageTy
     return 0;
 }
 
-void ButtonInit(Button* button, OnButtonEventFunc handler)
+Button* ButtonInit(Button* button, OnButtonEventFunc handler, RunLoop* runLoop, uint8_t buttonPort)
 {
-    button->_state = 0;
-    button->_downsamples = 0;
-    button->_onButtonEvent = handler;
-    InitRunLoopPort(&button->_port, _HandlePortMessage);
-    button->_port.userData = button;
-    SetPort(&mainRunLoop, RUNLOOP_PORT_BUTTON, &button->_port);
+    if (button) {
+        button->_state = 0;
+        button->_downsamples = 0;
+        button->_onButtonEvent = handler;
+        InitRunLoopPort(&button->_port, _HandlePortMessage);
+        button->_port.userData = button;
+        SetPort(runLoop, buttonPort, &button->_port);
+    }
+    return button;        
 }

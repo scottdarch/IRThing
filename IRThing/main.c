@@ -5,10 +5,10 @@
 */
 
 #include "Framework.h"
-#include "Button.h"
-#include "State.h"
+#include "tinker/Button.h"
+#include "tinker/State.h"
 #include "states/AllStates.h"
-#include "Machine.h"
+#include "tinker/Machine.h"
 #include "Indicator.h"
 
 
@@ -238,7 +238,7 @@ static inline void init()
     
     InitRunLoop(&mainRunLoop);
     IndicatorInit(&powerButtonIndicator, 0, onIndicatorStateChange);
-    ButtonInit(&powerButton, OnButtonEvent);
+    ButtonInit(&powerButton, OnButtonEvent, &mainRunLoop, RUNLOOP_PORT_BUTTON);
     
     InitRepeatState(&RepeatingState, &RunningState);
     InitCaptureState(&CapturingState, &RunningState, OnCapturePattern, OnCapturePatternFailed);

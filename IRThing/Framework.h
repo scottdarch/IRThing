@@ -3,6 +3,11 @@
 ~ IR THING |  ) ... ... ..     ... ... ..     ... ... ..     ... ... ..
 ~          +-+
 */
+/**
+ * \file Framework.h
+ * Common defines, includes, types, and method signatures for 
+ * the IR Thing firmware.
+ */
 
 
 #ifndef FRAMEWORK_H_
@@ -11,6 +16,7 @@
 
 // ATTiny Running at 20MHz (external crystal)
 #define F_CPU 20000000UL
+// MCU powered by 5v
 #define VCC 5
 
 #include <avr/power.h>
@@ -25,7 +31,7 @@
 #include <util/atomic.h>
 
 // +--------------------------------------------------------------------------+
-// | REGISTER MACROS
+// | HELPER MACROS
 // +--------------------------------------------------------------------------+
 #define IS_PIN_HIGH(xPORT, NUM) ((PIN ##xPORT & (1<<PIN ##xPORT##NUM)) ? 0x01 : 0x00)
 #define SETPIN_HIGH(xPORT, NUM) PORT ##xPORT |= (1<<PIN ##xPORT##NUM)
@@ -47,12 +53,14 @@
 // +--------------------------------------------------------------------------+
 // | RUN LOOPS
 // +--------------------------------------------------------------------------+
-#include "RunLoop.h"
+#include "tinker/RunLoop.h"
 
+/**
+ *
+ */
 extern RunLoop mainRunLoop;
 
 #define RUNLOOP_MESSAGE_FRAME 0
-#define RUNLOOP_MESSAGE_BUTTONTEST 1
 
 #define RUNLOOP_PORT_INDICATOR 0
 #define RUNLOOP_PORT_BUTTON 1

@@ -4,7 +4,9 @@
 ~          +-+
 */
 
-#include "Machine.h"
+#include "tinker/Machine.h"
+#include <stdlib.h>
+#include <avr/interrupt.h>
 
 typedef struct _MachinePrivate
 {
@@ -51,6 +53,7 @@ StateErrorType SetMachineState(Machine* machine, State* state)
     
 StateErrorType SetMachineStateWData(Machine* machine, State* state, void* data, uint8_t dataLen)
 {
+    // TODO: remove Atmel specific calls. Make this machine generic.
     cli();
     StateErrorType result = STATE_ERROR_NONE;
     if (machine)

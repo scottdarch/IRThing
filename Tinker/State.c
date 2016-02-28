@@ -4,7 +4,7 @@
 ~          +-+
 */
 
-#include "State.h"
+#include "tinker/State.h"
 
 // +--------------------------------------------------------------------------+
 // | PRIVATE STATE TYPE

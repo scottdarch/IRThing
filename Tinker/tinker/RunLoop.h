@@ -72,7 +72,7 @@ typedef uint8_t (*RunModeFunc)(struct _RunLoopType* runLoop, RunLoopMessageType 
  */
 typedef struct _RunLoopType
 {
-    RunLoopPort* ports[RUNLOOP_MAX_PORTS];
+    RunLoopPort* _ports[RUNLOOP_MAX_PORTS];
     uint8_t _portCount;
     
     /**

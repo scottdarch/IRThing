@@ -3,7 +3,10 @@
 ~ IR THING |  ) ... ... ..     ... ... ..     ... ... ..     ... ... ..
 ~          +-+
 */
-
+/**
+ * \file ATMachine.c
+ * Atmel AVR specific implementation of Machine.h.
+ */
 #include "tinker/Machine.h"
 #include <stdlib.h>
 #include <avr/interrupt.h>

@@ -34,6 +34,7 @@ typedef uint8_t (*RunModeFunc)(struct _RunLoopType*, RunLoopMessageType, RunLoop
 typedef struct _RunLoopType
 {
     RunLoopPort* ports[RUNLOOP_MAX_PORTS];
+    uint8_t _portCount;
     RunModeFunc runMode;
 } RunLoop;
 
@@ -48,6 +49,8 @@ RunLoop* InitRunLoop(RunLoop* newLoop);
  *         set for the given port number.
  */
 RunLoopPort* SetPort(RunLoop* runLoop, uint8_t portNumber, RunLoopPort* port);
+
+uint8_t AddPort(RunLoop* runLoop, RunLoopPort* port);
 
 RunLoopPort* RemovePort(RunLoop* runLoop, uint8_t portNumber);
 

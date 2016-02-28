@@ -22,7 +22,7 @@ uint8_t _RunMode(RunLoop* runLoop, RunLoopMessageType message, RunLoopMessageDat
     if (runLoop)
     {
         RunLoopPort* port;
-        for(uint8_t i = 0; i < RUNLOOP_MAX_PORTS && !handled; ++i)
+        for(uint8_t i = 0; i < runLoop->_portCount && !handled; ++i)
         {
             port = runLoop->ports[i];
             if (port)
@@ -39,6 +39,7 @@ RunLoop* InitRunLoop(RunLoop* newLoop)
     if (newLoop)
     {
         memset(newLoop->ports, 0, sizeof(RunLoopPort*) * RUNLOOP_MAX_PORTS);
+        newLoop->_portCount = 0;
         newLoop->runMode = _RunMode;
     }
     return newLoop; 
@@ -56,6 +57,17 @@ RunLoopPort* SetPort(RunLoop* runLoop, uint8_t portNumber, RunLoopPort* port)
         }
     }
     return displaced;
+}
+
+uint8_t AddPort(RunLoop* runLoop, RunLoopPort* port)
+{
+    uint8_t portNumber = RUNLOOP_MAX_PORTS;
+    if (runLoop && runLoop->_portCount < RUNLOOP_MAX_PORTS)
+    {
+        portNumber = runLoop->_portCount++;
+        runLoop->ports[portNumber] = port;
+    }
+    return portNumber;
 }
 
 RunLoopPort* RemovePort(RunLoop* runLoop, uint8_t portNumber)

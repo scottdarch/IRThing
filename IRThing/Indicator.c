@@ -123,7 +123,8 @@ Indicator* IndicatorInit(Indicator* newIndicator, OnIndicatorModeChangeFunc onMo
         newIndicator->_onstateChange = onStateChange;
         InitRunLoopPort(&newIndicator->_port, _HandlePortMessage);
         newIndicator->_port.userData = newIndicator;
-        SetPort(&mainRunLoop, RUNLOOP_PORT_INDICATOR, &newIndicator->_port);
+        AddPort(&mainRunLoop, &newIndicator->_port);
+        // TODO: if RUNLOOP_MAX_PORTS == AddPort then goto blink firmware error
     }
     return newIndicator;
 }

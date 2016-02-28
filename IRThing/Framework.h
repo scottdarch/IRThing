@@ -62,9 +62,6 @@ extern RunLoop mainRunLoop;
 
 #define RUNLOOP_MESSAGE_FRAME 0
 
-#define RUNLOOP_PORT_INDICATOR 0
-#define RUNLOOP_PORT_BUTTON 1
-
 extern void disableMainLoopTimer();
 extern void enableMainLoopTimer();
 extern void driveMainRunLoop(uint8_t timeSinceLastRunMillis);

@@ -238,7 +238,8 @@ static inline void init()
     
     InitRunLoop(&mainRunLoop);
     IndicatorInit(&powerButtonIndicator, 0, onIndicatorStateChange);
-    ButtonInit(&powerButton, OnButtonEvent, &mainRunLoop, RUNLOOP_PORT_BUTTON);
+    ButtonInit(&powerButton, OnButtonEvent, &mainRunLoop);
+    // TODO: if !ButtonInit then goto firmware error blink
     
     InitRepeatState(&RepeatingState, &RunningState);
     InitCaptureState(&CapturingState, &RunningState, OnCapturePattern, OnCapturePatternFailed);

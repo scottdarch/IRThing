@@ -54,12 +54,13 @@ typedef struct _ButtonType
 
 /**
  * Objective-C style button object initializer.
- * \param button    The button instance to initialize.
- * \param handler   A handler function to invoke when events occur for the
- *                  button instance.
+ * \param button     The button instance to initialize.
+ * \param handler    A handler function to invoke when events occur for the
+ *                   button instance.
+ * \param runLoop    The runloop used to process GPIO state and generate button events.
  * \return A pointer to the initialized button instance.
  */
-Button* ButtonInit(Button* button, OnButtonEventFunc handler, RunLoop* runLoop, uint8_t buttonPort);
+Button* ButtonInit(Button* button, OnButtonEventFunc handler, RunLoop* runLoop);
 
 // +--------------------------------------------------------------------------+
 // | BUTTON TUNING

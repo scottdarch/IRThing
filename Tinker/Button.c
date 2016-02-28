@@ -109,15 +109,21 @@ uint8_t _HandlePortMessage(RunLoopPort* port, RunLoop* runLoop, RunLoopMessageTy
     return 0;
 }
 
-Button* ButtonInit(Button* button, OnButtonEventFunc handler, RunLoop* runLoop, uint8_t buttonPort)
+Button* ButtonInit(Button* button, OnButtonEventFunc handler, RunLoop* runLoop)
 {
     if (button) {
-        button->_state = 0;
-        button->_downsamples = 0;
-        button->_onButtonEvent = handler;
-        InitRunLoopPort(&button->_port, _HandlePortMessage);
-        button->_port.userData = button;
-        SetPort(runLoop, buttonPort, &button->_port);
+        if (RUNLOOP_MAX_PORTS == AddPort(runLoop, &button->_port))
+        {
+            button = 0;
+        }
+        else
+        {
+            button->_state = 0;
+            button->_downsamples = 0;
+            button->_onButtonEvent = handler;
+            InitRunLoopPort(&button->_port, _HandlePortMessage);
+            button->_port.userData = button;
+        }        
     }
     return button;        
 }

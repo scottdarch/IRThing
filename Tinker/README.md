@@ -10,6 +10,7 @@ objects are structs with initializer functions that are separate from their allo
 
 This version of Tinker does not provide any allocators.
 
+Tinker is provided without warranty under [the Apache 2 license](http://www.apache.org/licenses/LICENSE-2.0).
 
 ## Components
 

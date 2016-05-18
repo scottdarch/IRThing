@@ -1,7 +1,17 @@
 /*
-~          +-+
-~ IR THING |  ) ... ... ..     ... ... ..     ... ... ..     ... ... ..
-~          +-+
+Copyright 2016 Scott A Dixon
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
 */
 
 #include "tinker/Button.h"
@@ -27,7 +37,7 @@ uint8_t _testButtonPin(Button* self, uint8_t isPinHigh)
 
     // shift a new pin reading into the queue and restore the top 3 bits.
     state = ((state << 1) & BUTTON_READING_BITS_MASK) | (downState << 8) | !isPinHigh;
-    
+
     // UP
     // 1xx1 0000 0000 0000
     // DOWN
@@ -123,7 +133,7 @@ Button* ButtonInit(Button* button, OnButtonEventFunc handler, RunLoop* runLoop)
             button->_onButtonEvent = handler;
             InitRunLoopPort(&button->_port, _HandlePortMessage);
             button->_port.userData = button;
-        }        
+        }
     }
-    return button;        
+    return button;
 }

@@ -1,8 +1,19 @@
 /*
-~          +-+
-~ IR THING |  ) ... ... ..     ... ... ..     ... ... ..     ... ... ..
-~          +-+
+Copyright 2016 Scott A Dixon
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
 */
+
 
 #ifndef RUNLOOP_H_
 #define RUNLOOP_H_
@@ -40,7 +51,7 @@ typedef struct _RunLoopPortType
      * Set by the InitRunLoopPort initializer.
      */
     OnHandlePortMessageFunc handlePortMessage;
-    
+
     /**
      * Opaque pointer available for external use.
      * This pointer is neither read nor written by the
@@ -74,7 +85,7 @@ typedef struct _RunLoopType
 {
     RunLoopPort* _ports[RUNLOOP_MAX_PORTS];
     uint8_t _portCount;
-    
+
     /**
      * The method to invoke when driving this runloop. For example to drive
      * a runloop from a timer interrupt (AVR example given here) do:
